@@ -1,17 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>O aplikaci</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">O aplikaci</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Author and course information card -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>CounterApp</ion-card-title>
+      <ion-card-subtitle>Mobilní aplikace (AP5PM)</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Předmět:</strong> AP5PM - Vývoj aplikací pro mobilní zařízení</p>
+      <p><strong>Projekt:</strong> Počítadlo s historií (CV1 – CV4)</p>
+      <p><strong>Technologie:</strong> Angular 22, Ionic 9, Capacitor 8.5</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
