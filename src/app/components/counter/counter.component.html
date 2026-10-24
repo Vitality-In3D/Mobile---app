@@ -1,0 +1,52 @@
+<div class="counter-card">
+  <!-- Counter heading passed via Signal input -->
+  <h2 class="counter-heading">{{ heading() }}</h2>
+
+  <!-- Counter name input field -->
+  <ion-item lines="none" class="counter-input-item">
+    <ion-input
+      label="Název počítadla"
+      labelPlacement="floating"
+      placeholder="Zadejte název..."
+      [(ngModel)]="counterName"
+      [clearInput]="true"
+    ></ion-input>
+  </ion-item>
+
+  <!-- Current value display -->
+  <div class="counter-display">
+    <span class="counter-value">{{ count }}</span>
+  </div>
+
+  <!-- Action buttons: decrement, reset, increment -->
+  <div class="counter-actions">
+    <ion-button
+      color="danger"
+      fill="outline"
+      (click)="decrement()"
+      [disabled]="count <= 0"
+      aria-label="Snížit hodnotu"
+    >
+      −1
+    </ion-button>
+
+    <ion-button
+      color="medium"
+      fill="clear"
+      (click)="reset()"
+      [disabled]="count === 0"
+      aria-label="Vynulovat hodnotu"
+    >
+      Reset
+    </ion-button>
+
+    <ion-button color="primary" (click)="increment()" aria-label="Zvýšit hodnotu"> +1 </ion-button>
+  </div>
+
+  <!-- Save counter button -->
+  <div class="save-section">
+    <ion-button expand="block" color="success" (click)="save()" [disabled]="!counterName.trim()">
+      Uložit počítadlo
+    </ion-button>
+  </div>
+</div>
