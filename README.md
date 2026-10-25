@@ -60,10 +60,12 @@ npm install
 ### 2. Spuštění lokálního vývojového serveru
 
 ```bash
+npm start
+# nebo pomocí Ionic CLI:
 ionic serve
 ```
 
-Aplikace se spustí ve výchozím prohlížeči na adrese `http://localhost:8100/`.
+Aplikace se spustí ve webovém prohlížeči (`http://localhost:4200/` při `npm start` nebo `http://localhost:8100/` při `ionic serve`).
 
 ### 3. Kontrola linteru
 
