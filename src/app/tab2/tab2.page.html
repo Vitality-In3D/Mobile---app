@@ -1,17 +1,76 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Historie</ion-title>
+    @if (counterService.initialized() && counterService.counters().length > 0) {
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="clear()"> Vymazat vše </ion-button>
+    </ion-buttons>
+    }
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Historie</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- State 1: Loading data -->
+  @if (!counterService.initialized()) {
+  <div class="empty-state">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Načítám historii…</p>
+  </div>
+  }
+  <!-- State 2: Empty history list -->
+  @else if (counterService.counters().length === 0) {
+  <div class="empty-state">
+    <p>Historie je zatím prázdná.</p>
+  </div>
+  }
+  <!-- State 3: Display list with stats and actions -->
+  @else {
+  <!-- Stats card: total records and average value -->
+  <ion-card class="stats-card">
+    <ion-card-content class="stats-content">
+      <div class="stat-item">
+        <span class="stat-label">Počet záznamů</span>
+        <span class="stat-value">{{ counterService.counters().length }}</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-label">Průměr hodnot</span>
+        <span class="stat-value highlight">{{ counterService.average() | number: '1.0-2' }}</span>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="action-bar">
+    <ion-button color="danger" fill="outline" size="small" (click)="clear()">
+      Vymazat vše
+    </ion-button>
+  </div>
+
+  <ion-list [inset]="true">
+    @for (counter of counterService.counters(); track counter.id) {
+    <ion-item>
+      <ion-label>
+        <h2>{{ counter.name }}</h2>
+        <p>{{ counter.createdAt | date: 'd. M. y, HH:mm' }}</p>
+      </ion-label>
+      <ion-badge slot="end" color="primary" class="counter-badge"> {{ counter.value }} </ion-badge>
+      <ion-button
+        slot="end"
+        fill="clear"
+        color="danger"
+        (click)="remove(counter.id)"
+        aria-label="Smazat záznam"
+      >
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    }
+  </ion-list>
+  }
 </ion-content>
